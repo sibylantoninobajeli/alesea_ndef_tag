@@ -37,7 +37,7 @@ class _PrivacyAndPolicyState extends State<PrivacyAndPolicy> {
           primaryColor: aleseaLogoColor,
         ),
         child: Scaffold(
-            backgroundColor: backgroundColor,
+            backgroundColor: aleseaBackgroundColor,
             appBar: null, // AppBar(title: const Text('Page selector')),
             body: _getPrivacyPolicy(
                 context,
@@ -180,7 +180,7 @@ class _PrivacyAndPolicyState extends State<PrivacyAndPolicy> {
                                   .primary
                                   .withOpacity(0.5);
                             else if (states.contains(MaterialState.disabled))
-                              return disabledColor;
+                              return aleseaDisabledColor;
                             return aleseaPrimaryColor; // Use the component's default.
                           },
                         )),

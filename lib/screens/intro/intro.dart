@@ -293,7 +293,7 @@ class Intro extends StatelessWidget {
           primaryColor: aleseaLogoColor,
         ),
         child: Scaffold(
-          backgroundColor: backgroundColor,
+          backgroundColor: aleseaBackgroundColor,
           appBar: null, // AppBar(title: const Text('Page selector')),
           body: DefaultTabController(
             length: widgetPages.length,

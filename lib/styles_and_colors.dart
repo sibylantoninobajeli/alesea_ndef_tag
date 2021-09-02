@@ -8,10 +8,10 @@ final aleseaLogoColor = const Color(0xff1e2353);
 final aleseaPrimaryColor = const Color(0xff3a6b82);
 final aleseaPrimaryVariantColor = const Color(0xff335d71);
 final aleseaSecondaryColor = const Color(0xff6c757d);
-final backgroundColor = const Color(0xffeef0f2);
-final disabledColor = const Color(0xffb8bfc6);
-final textColor = const Color(0xff212529);
-final successColor = const Color(0xff7bba70);
+final aleseaBackgroundColor = const Color(0xffeef0f2);
+final aleseaDisabledColor = const Color(0xffb8bfc6);
+final aleseaTextColor = const Color(0xff212529);
+final aleseaSuccessColor = const Color(0xff7bba70);
 
 TextStyle aleseaTextStyleRegularWhiteVeryBig = TextStyle(
     fontFamily: "Helvetica nueue regular",
@@ -38,7 +38,7 @@ if (states.any(interactiveStates.contains)) {
 return Colors.blue;
 }
 if (states.contains(MaterialState.selected)) {
-return successColor;
+return aleseaSuccessColor;
 }
-return disabledColor;
+return aleseaDisabledColor;
 }

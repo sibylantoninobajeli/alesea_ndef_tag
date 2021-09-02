@@ -35,10 +35,10 @@ class _SettingsState extends State<Settings> {
         data: ThemeData(
 
           brightness: Brightness.light,
-          primaryColor: backgroundColor,
+          primaryColor: aleseaBackgroundColor,
         ),
         child: Scaffold(
-            backgroundColor: backgroundColor,
+            backgroundColor: aleseaBackgroundColor,
             appBar: AppBar(
               title: const Text('Settings'),
               centerTitle: true,
@@ -72,6 +72,9 @@ class _SettingsState extends State<Settings> {
                     color: Colors.transparent,
                   ),
 
+                  getGPSPermission( iconSize / 2.4),
+                  Spacer(),
+                  getCameraPermission( iconSize / 2.4),
                   Spacer(),
                   getCheckPolicy( iconSize / 3, CustomLocalizations.of(context)!.privacyAndPolicyAccept!,),
                   Spacer(),
@@ -84,9 +87,9 @@ class _SettingsState extends State<Settings> {
       children: [
         Container(
             decoration: BoxDecoration(
-                color: disabledColor,
+                color: aleseaDisabledColor,
                 border: Border.all(
-                  color: disabledColor,
+                  color: aleseaDisabledColor,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: (Column(
@@ -102,11 +105,11 @@ class _SettingsState extends State<Settings> {
                       ),
                       title: Text(
                         "You are logged as:",
-                        style: TextStyle(color: textColor),
+                        style: TextStyle(color: aleseaTextColor),
                       ),
                       subtitle: Text(user.username,
                           style: TextStyle(
-                              color: textColor,
+                              color: aleseaTextColor,
                               fontSize: iconSize * 0.7,
                               fontWeight: FontWeight.bold)),
                     )),
@@ -187,38 +190,73 @@ class _SettingsState extends State<Settings> {
   }
 
 
-  Widget getGPSPermission(double textAreaSize,String textAccept){
+  Widget getGPSPermission(double textAreaSize){
     double acceptCharSize= textAreaSize;
     bool isChecked=(authState == InternalNotificationType.LOGGED_IN_AND_PRIVACY);
 
-    return Row(
-      children: [
-        Padding(
-            padding: EdgeInsets.only(left: textAreaSize * 0.05),
-            child: Transform.scale(
-                scale: 2,
-                child: Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.resolveWith(
-                      getCheckboxColor),
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value!;
-                    });
-                  },
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(4),
-                  ),
-                ))),
-        Padding(
-            padding: EdgeInsets.only(left: textAreaSize * 0.02),
-            child: Text(
-              textAccept,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: acceptCharSize),
-            )),
-      ],
+    return ListTile(
+        title: Text(
+              "GPS permission",
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: acceptCharSize*1.3,fontWeight: FontWeight.bold),
+            ),
+      subtitle: Column(
+        crossAxisAlignment:CrossAxisAlignment.start,
+        children: [
+
+
+        Text(
+          "Grant access to your location to use the Quality Check App",
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: acceptCharSize),
+        ),
+        Text(
+          "Configure",
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: acceptCharSize),
+        ),
+      ],),
+      trailing: Text(
+        "Granted",
+        textAlign: TextAlign.left,
+        style: TextStyle(fontSize: acceptCharSize*1.5,color: aleseaSuccessColor,fontWeight: FontWeight.bold),
+      ),
+
+    );
+  }
+
+
+  Widget getCameraPermission(double textAreaSize){
+    double acceptCharSize= textAreaSize;
+    bool isChecked=(authState == InternalNotificationType.LOGGED_IN_AND_PRIVACY);
+
+    return ListTile(
+      title: Text(
+        "Camera permissions",
+        textAlign: TextAlign.left,
+        style: TextStyle(fontSize: acceptCharSize*1.3,fontWeight: FontWeight.bold),
+      ),
+      subtitle:
+      Column(
+        crossAxisAlignment:CrossAxisAlignment.start,
+        children: [
+        Text(
+          "Grant access to your camera to use the Quality Check App",
+          textAlign: TextAlign.left,
+          style: TextStyle(fontSize: acceptCharSize),
+        ),
+      Text(
+        "Configure",
+        textAlign: TextAlign.left,
+        style: TextStyle(fontSize: acceptCharSize),
+      ),
+      ],),
+      trailing: Text(
+        "Granted",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: acceptCharSize*1.5,color: aleseaSuccessColor,fontWeight: FontWeight.bold),
+      ),
+
     );
   }
 
