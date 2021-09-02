@@ -1,7 +1,8 @@
 import 'package:alesea_ndef_tag/action..dart';
 import 'package:alesea_ndef_tag/screens/intro/intro.dart';
 import 'package:alesea_ndef_tag/screens/login_screen.dart';
-import 'package:alesea_ndef_tag/screens/privacy.dart';
+import 'package:alesea_ndef_tag/screens/privacy_and_policy.dart';
+import 'package:alesea_ndef_tag/screens/settings.dart';
 import 'package:alesea_ndef_tag/styles_and_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,7 +33,6 @@ void main() {
 }
 
 bool _firstAccess = true;
-InternalNotificationType _authState = InternalNotificationType.LOGGED_OUT;
 
 
 
@@ -57,9 +57,6 @@ class  AppState  extends State<App> implements InternalNotificationListener {
         _firstAccess = isFirst;
       });
     });
-
-
-
 
     super.initState();
   }
@@ -104,7 +101,7 @@ class  AppState  extends State<App> implements InternalNotificationListener {
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': ((BuildContext _context) => getProperRoot()),
-        '/privacy': (BuildContext _context) => Privacy(),
+        '/privacy': (BuildContext _context) => PrivacyAndPolicy(),
         '/intro': (BuildContext _context) => Intro(),
         //'/home': (BuildContext _context) => MyApp(),
         // Shown when launched with known deep link.
@@ -131,17 +128,17 @@ class  AppState  extends State<App> implements InternalNotificationListener {
         break;
       case InternalNotificationType.LOGGED_IN:
         setState(() {
-          _authState = InternalNotificationType.LOGGED_IN;
+          authState = InternalNotificationType.LOGGED_IN;
         });
         break;
       case InternalNotificationType.LOGGED_IN_AND_PRIVACY:
         setState(() {
-          _authState = InternalNotificationType.LOGGED_IN_AND_PRIVACY;
+          authState = InternalNotificationType.LOGGED_IN_AND_PRIVACY;
         });
         break;
       case InternalNotificationType.LOGGED_OUT:
         setState(() {
-          _authState = InternalNotificationType.LOGGED_OUT;
+          authState = InternalNotificationType.LOGGED_OUT;
         });
         break;
 
@@ -161,11 +158,11 @@ Widget getProperRoot(){
       return Intro();
     }else {
       /// standard Access
-      if (_authState == InternalNotificationType.LOGGED_IN) {
-        if (_authState == InternalNotificationType.LOGGED_IN_AND_PRIVACY) {
-          return MyApp();
+      if ((authState == InternalNotificationType.LOGGED_IN)||(authState == InternalNotificationType.LOGGED_IN_AND_PRIVACY)) {
+        if (authState == InternalNotificationType.LOGGED_IN_AND_PRIVACY) {
+          return AuthanticatedDashboard();
         }else{
-          return Privacy();
+          return PrivacyAndPolicy();
         }
       }else
           return LoginScreen();
@@ -174,14 +171,12 @@ Widget getProperRoot(){
 }
 
 
-class MyApp extends StatefulWidget {
+class AuthanticatedDashboard extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => MyAppState();
+  State<StatefulWidget> createState() => AuthanticatedDashboardState();
 }
 
-
-
-class MyAppState extends State<MyApp> {
+class AuthanticatedDashboardState extends State<AuthanticatedDashboard> {
   bool isAdmin=false;
   @override
   Widget build(BuildContext context) {
@@ -191,7 +186,19 @@ class MyAppState extends State<MyApp> {
 
     return Scaffold(
 
-        appBar: AppBar(title: Text('Alesea TAG: '+user!.username)),
+        appBar: AppBar(title: Text('Alesea TAG: '+user!.username),
+        leading: IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: (){
+              Navigator.push<void>(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const Settings(),
+                ),
+              );
+            }
+
+    ),),
         body: SafeArea(
           child: Center(child:Column(
             crossAxisAlignment: CrossAxisAlignment.center,

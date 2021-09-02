@@ -11,9 +11,12 @@ final Locale locale;
   String? get passwordLabel {return static_loc.localizedValues[locale.languageCode]!['passwordLabel']; }
   String? get mostraPasswordMex {return static_loc.localizedValues[locale.languageCode]!['mostraPasswordMex']; }
   String? get nascondiPasswordMex {return static_loc.localizedValues[locale.languageCode]!['nascondiPasswordMex']; }
+  String? get logout {return static_loc.localizedValues[locale.languageCode]!['logout']; }
 
   String? get chooserDemo1LoginMex {return static_loc.localizedValues[locale.languageCode]!['chooserDemo1LoginMex']; }
   String? get chooserDemo2LoginMex {return static_loc.localizedValues[locale.languageCode]!['chooserDemo2LoginMex']; }
-  String? get privacYAndPolicy {return static_loc.localizedValues[locale.languageCode]!['privacYAndPolicy']; }
+  String? get privacyAndPolicyTitle {return static_loc.localizedValues[locale.languageCode]!['privacyAndPolicyTitle']; }
+  String? get privacyAndPolicyBody {return static_loc.localizedValues[locale.languageCode]!['privacyAndPolicyBody']; }
+String? get privacyAndPolicyAccept {return static_loc.localizedValues[locale.languageCode]!['privacyAndPolicyAccept']; }
 
 }

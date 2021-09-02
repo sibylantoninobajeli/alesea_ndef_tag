@@ -182,23 +182,29 @@ class Intro extends StatelessWidget {
 
           Positioned(
             top: 2 * logoSize,
-            child: ElevatedButton(
-                onPressed: () async {
-                  startAction(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(logoSize * 0.4),
-
-                  ),
-                  padding: EdgeInsets.all(logoSize * 0.08),
-                ).copyWith(
-                    backgroundColor:
-                    MaterialStateProperty.all(aleseaPrimaryColor)),
-                child: Row(children: [Text('Login ',style: TextStyle(fontSize: logoSize*0.08)),Icon(Icons.lock_open, size:logoSize*0.08*1.5)],)),
+            child: getLoginButton( context, logoSize),
           ),
         ]));
   }
+
+  Widget getLoginButton(BuildContext context,double logoSize){
+    return ElevatedButton(
+        onPressed: () async {
+          startAction(context);
+        },
+        style: ElevatedButton.styleFrom(
+          shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(logoSize * 0.4),
+
+          ),
+          padding: EdgeInsets.all(logoSize * 0.08),
+        ).copyWith(
+            backgroundColor:
+            MaterialStateProperty.all(aleseaPrimaryColor)),
+        child: Row(children: [Text('Login ',style: TextStyle(fontSize: logoSize*0.08)),Icon(Icons.lock_open, size:logoSize*0.08*1.5)],));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
